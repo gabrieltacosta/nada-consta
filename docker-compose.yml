@@ -1,0 +1,30 @@
+services:
+
+  db:
+    image: postgres:13-alpine
+    environment:
+      POSTGRES_DB: postgresql
+      POSTGRES_USER: postgresql
+      POSTGRES_PASSWORD: postgresql
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  sge-app:
+    build: .
+    volumes:
+      - .:/app
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+    environment:
+      DB_NAME: postgresql
+      DB_USER: postgresql
+      DB_PASSWORD: postgresql
+      DB_HOST: db
+      DB_PORT: 5432
+
+volumes:
+  postgres_data:
+
+​
