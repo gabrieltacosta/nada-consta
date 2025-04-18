@@ -1,14 +1,14 @@
-FROM python:3.12-slim
+FROM python:3
 
-WORKDIR /app
+ENV PYTHONUNBUFFERED=1
 
-COPY . .
+WORKDIR /usr/src/app
 
-COPY requirements.txt .
+COPY requirements.txt ./
 
-RUN pip3 install --no-cache-dir -r requirements.txt
+RUN pip uninstall django
 
-COPY . .
+RUN pip install -r requirements.txt
 
 EXPOSE 8000
 
